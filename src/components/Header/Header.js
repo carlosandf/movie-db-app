@@ -1,5 +1,5 @@
 import styles from './Header.module.css';
-import searchIcon from '../../../public/search-icon.svg';
+import { Icon } from '../icon.js';
 const $ = document;
 
 /*
@@ -28,18 +28,8 @@ form.className = styles.search;
 const input = $.createElement('input');
 input.placeholder = 'Buscar...';
 
-const icon = ({ styles, src }) => {
-  const image = $.createElement('img');
-  image.setAttribute('src', src);
-
-  if (styles) {
-    image.setAttribute('style', styles);
-  }
-  return image;
-};
-
 const button = $.createElement('button');
-button.append(icon({ src: searchIcon, styles: 'width: 1.7rem, fill: var(--brandColor)' }));
+button.innerHTML = Icon({ fill: '#1762ee', width: '1.7rem' });
 
 form.append(
   input,

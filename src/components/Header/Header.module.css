@@ -52,6 +52,7 @@
   font-size: 1.6rem;
   border: none;
   background: none;
+  display: flex;
 }
 
 @media (width >= 600px) {

@@ -1,0 +1,65 @@
+.header {
+  width: 100%;
+  padding: 1.4rem;
+  display: flex;
+  gap: .8rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-title > a {
+  text-decoration: none;
+  color: var(--brandColor);
+  font-weight: bolder;
+  line-height: 0;
+}
+
+.search {
+  outline: none;
+  position: relative;
+  padding: 0.8rem 1.2rem;
+  width: 100%;
+  max-width: 40rem;
+  border: 1px solid var(--brandColor);
+  border-radius: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.search > input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1.6rem;
+  background: none;
+  color: var(--white);
+}
+
+.search > input:focus::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 3px solid rgb(255, 255, 255); /* Puedes ajustar el color y el grosor del contorno aquí */
+  border-radius: 4px;
+}
+
+.search > button {
+  font-size: 1.6rem;
+  border: none;
+  background: none;
+}
+
+@media (width >= 600px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .main-title {
+    font-size: 3.5rem;
+  }
+}

@@ -2,18 +2,6 @@ import styles from './Header.module.css';
 import { Icon } from '../icon.js';
 const $ = document;
 
-/*
-<header >
-  <h1 class="main-title">
-    <a href="/">MovieApp</a>
-  </h1>
-  <form class="search">
-    <input placeholder="Buscar..." type="text" />
-    <button>🔍</button>
-  </form>
-</header>
-*/
-
 const title = $.createElement('h1');
 title.className = styles['main-title'];
 const link = $.createElement('a');
@@ -50,3 +38,15 @@ form.onsubmit = (e) => {
   dark = !dark;
   document.body.style.backgroundColor = dark ? '#000' : '#fff';
 };
+
+/*
+<header >
+  <h1 class="main-title">
+    <a href="/">MovieApp</a>
+  </h1>
+  <form class="search">
+    <input placeholder="Buscar..." type="text" />
+    <button>🔍</button>
+  </form>
+</header>
+*/

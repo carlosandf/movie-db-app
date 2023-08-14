@@ -1,0 +1,9 @@
+.figure {
+  aspect-ratio: 9/14;
+  display: flex;
+  width: 16rem;
+}
+.figure > img {
+  width: 100%;
+  object-fit: cover;
+}

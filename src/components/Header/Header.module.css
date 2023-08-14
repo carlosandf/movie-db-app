@@ -38,17 +38,6 @@
   color: var(--white);
 }
 
-.search > input:focus::after {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border: 3px solid rgb(255, 255, 255); /* Puedes ajustar el color y el grosor del contorno aquí */
-  border-radius: 4px;
-}
-
 .search > button {
   font-size: 1.6rem;
   border: none;

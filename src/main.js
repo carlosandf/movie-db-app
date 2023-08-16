@@ -1,5 +1,5 @@
 // import { API_KEY } from './utils/constants.js';
-import { Header } from './components/Header/Header.js';
+import { div } from './components/Header/Header.js';
 import { Poster } from './components/Poster/Poster.js';
 
 import '../style.css';
@@ -7,8 +7,9 @@ import '../style.css';
 const $ = document;
 
 const trend = $.querySelector('.trend');
+$.querySelector('#header').append(div);
 
-$.querySelector('#app').append(Header);
+$.querySelector('#app').append();
 
 const movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const total = movies.map(movie => {

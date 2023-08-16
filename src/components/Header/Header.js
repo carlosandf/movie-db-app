@@ -3,12 +3,19 @@ import { Icon } from '../icon.js';
 const $ = document;
 
 const title = $.createElement('h1');
+title.id = 'nav-title';
+
 title.className = styles['main-title'];
 const link = $.createElement('a');
 link.textContent = 'MovieApp';
 title.appendChild(
   link
 );
+
+const nav = $.createElement('nav');
+nav.className = styles.nav;
+nav.id = '#nav';
+nav.appendChild(title);
 
 const form = $.createElement('form');
 form.className = styles.search;
@@ -24,11 +31,11 @@ form.append(
   button
 );
 
-export const Header = $.createElement('header');
-Header.className = styles.header;
+export const div = $.createElement('div');
+div.className = styles.header;
 
-Header.append(
-  title,
+div.append(
+  nav,
   form
 );
 
@@ -40,13 +47,15 @@ form.onsubmit = (e) => {
 };
 
 /*
-<header >
-  <h1 class="main-title">
-    <a href="/">MovieApp</a>
-  </h1>
+<div class="">
+  <nav class="nav" id="nav">
+    <h1 class="main-title">
+      <a href="/">MovieApp</a>
+    </h1>
+  </nav>
   <form class="search">
     <input placeholder="Buscar..." type="text" />
     <button>🔍</button>
   </form>
-</header>
+</div>
 */

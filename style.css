@@ -1,3 +1,4 @@
+@import url('./styles/trend.css');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,7 +6,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #0b0a0a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,7 +15,8 @@
   -webkit-text-size-adjust: 100%;
 
   --brandColor: #1762ee;
-  --white: #7e7e7e;
+  --white: #c3c3c3;
+  --secundary-text-color: #7e7e7e;
 }
 
 * {
@@ -28,15 +30,24 @@ html {
 }
 
 body {
-  margin: 0;
   min-width: 320px;
+  max-width: 1250px;
   min-height: 100vh;
+  margin: 0 auto;
 }
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
+}
+
+main {
+  padding: 1rem;
+}
+
+.inactive {
+  display: none;
 }
 
 @media (prefers-color-scheme: light) {

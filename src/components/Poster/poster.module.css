@@ -1,9 +1,20 @@
+.movie-item {
+  aspect-ratio: 9/14;
+}
 .figure {
+  background-color: #080808;
   aspect-ratio: 9/14;
   display: flex;
+  border-radius: 5px;
   width: 16rem;
+  overflow: hidden;
+  cursor: pointer;
 }
 .figure > img {
   width: 100%;
   object-fit: cover;
+  transition: opacity .2s;
+}
+.figure > img:hover {
+  opacity: .4;
 }

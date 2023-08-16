@@ -1,6 +1,7 @@
 // import { API_KEY } from './utils/constants.js';
 import { div } from './components/Header/Header.js';
 import { Poster } from './components/Poster/Poster.js';
+import { getTrendingMoviesPreview } from './services/movies.js';
 
 import '../style.css';
 
@@ -11,11 +12,15 @@ $.querySelector('#header').append(div);
 
 $.querySelector('#app').append();
 
-const movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const total = movies.map(movie => {
-  return Poster({ poster: 'https://i.pinimg.com/originals/7e/37/b9/7e37b994b613e94cba64f307b1983e39.jpg' });
-});
-
-trend?.append(
-  ...total
-);
+getTrendingMoviesPreview()
+  .then(res => {
+    console.log(res);
+    res?.forEach(movie => {
+      trend.appendChild(
+        Poster(movie)
+      );
+      return Poster(movie);
+    });
+  })
+  .catch(console.error)
+  .finally(console.log);

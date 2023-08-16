@@ -1,3 +1,4 @@
+import { IMAGE_URL } from '../../utils/constants.js';
 import styles from './poster.module.css';
 /*
 <article>
@@ -9,11 +10,12 @@ import styles from './poster.module.css';
 const $ = document;
 export const Poster = (movie) => {
   const article = $.createElement('article');
+  article.className = styles['movie-item'];
   const figure = $.createElement('figure');
   figure.className = styles.figure;
 
   const img = $.createElement('img');
-  img.src = movie?.poster;
+  img.src = `${IMAGE_URL}/${movie?.poster_path}`;
   img.alt = movie?.title;
 
   figure.appendChild(img);

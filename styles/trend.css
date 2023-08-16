@@ -1,0 +1,17 @@
+.trend {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+
+.trend-conatines {
+  display: grid;
+  gap: 1rem;
+}
+.trend-conatines > h3 {
+  font-size: 2rem;
+  color: var(--white);
+}

@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MovieDB App</title>
-    <script type="module" src="/src/main.js"></script>
   </head>
   <body>
     <header id="header"></header>
@@ -14,11 +13,17 @@
     </style>
 
     <main>
-      <section class="trend-conatines">
+      <section class="trend-container carousel">
         <h3>Tendencias</h3>
-        <section class="trend"></section>
+        <section id="trend"></section>
+      </section>
+
+      <section class="categories-container carousel">
+        <h3>Categorias</h3>
+        <section id="categories"></section>
       </section>
     </main>
 
+    <script type="module" defer src="/src/main.js"></script>
   </body>
 </html>

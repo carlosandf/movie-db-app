@@ -31,10 +31,10 @@ form.append(
   button
 );
 
-export const div = $.createElement('div');
-div.className = styles.header;
+export const headerContent = $.createElement('div');
+headerContent.className = styles.header;
 
-div.append(
+headerContent.append(
   nav,
   form
 );

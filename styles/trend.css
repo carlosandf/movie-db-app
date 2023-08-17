@@ -1,17 +1,19 @@
-.trend {
+#trend {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   flex-direction: row;
-  overflow-x: scroll;
+  overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
 }
 
-.trend-conatines {
-  display: grid;
-  gap: 1rem;
+#trend::-webkit-scrollbar {
+  -webkit-appearance: none;
 }
-.trend-conatines > h3 {
-  font-size: 2rem;
-  color: var(--white);
+#trend::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+#trend::-webkit-scrollbar-thumb {
+  background-color: #9b9b9b5d;
+  border-radius: 20px;
 }

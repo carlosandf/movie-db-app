@@ -1,4 +1,5 @@
 @import url('./styles/trend.css');
+@import url('./styles/categories.css');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -43,11 +44,22 @@ body {
 }
 
 main {
-  padding: 1rem;
+  padding: 1.4rem;
+  display: grid;
+  gap: 4rem;
 }
 
 .inactive {
-  display: none;
+  display: none !important;
+}
+
+.carousel {
+  display: grid;
+  gap: 1rem;
+}
+.carousel > h3 {
+  font-size: 2rem;
+  color: var(--white);
 }
 
 @media (prefers-color-scheme: light) {

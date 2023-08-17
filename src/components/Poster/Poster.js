@@ -20,6 +20,15 @@ export const Poster = (movie) => {
 
   figure.appendChild(img);
 
-  article.appendChild(figure);
+  const footer = $.createElement('footer');
+  footer.className = styles.posterFooter;
+  const span = $.createElement('span');
+  span.textContent = movie?.title;
+  footer.appendChild(span);
+
+  article.append(
+    figure,
+    footer
+  );
   return article;
 };

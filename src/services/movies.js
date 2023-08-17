@@ -1,23 +1,38 @@
-// import axios from 'axios';
 import { BASE_URL, ACCESS_TOKEN } from '../utils/constants';
 
-export async function getTrendingMoviesPreview () {
-  const url = `${BASE_URL}/trending/movie/day?lenguage=es`;
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${ACCESS_TOKEN}`
-    }
-  };
+const getOptions = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${ACCESS_TOKEN}`
+  }
+};
+
+export async function getTrendingMoviesPreview ({ page = 1 }) {
+  const url = `${BASE_URL}/trending/movie/day?page=${page}&language=es`;
 
   try {
-    const res = await fetch(url, options);
+    const res = await fetch(url, getOptions);
 
     if (!res.ok) throw Error(res);
-    const data = await res.json();
 
-    return data.results;
+    const data = await res.json();
+    return data?.results;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getCategoriesPreview () {
+  const url = `${BASE_URL}/genre/movie/list?language=es`;
+
+  try {
+    const res = await fetch(url, getOptions);
+
+    if (!res.ok) throw Error(res);
+
+    const data = await res.json();
+    return data?.genres;
   } catch (error) {
     console.error(error);
   }

@@ -1,26 +1,38 @@
 // import { API_KEY } from './utils/constants.js';
-import { div } from './components/Header/Header.js';
-import { Poster } from './components/Poster/Poster.js';
-import { getTrendingMoviesPreview } from './services/movies.js';
+import { headerContent } from './components/header/header.js';
+import { Poster } from './components/poster/poster.js';
+import { Category } from './components/category/category.js';
+import {
+  getCategoriesPreview,
+  getTrendingMoviesPreview
+} from './services/movies-axios.js';
 
 import '../style.css';
 
 const $ = document;
+$.querySelector('#header').append(headerContent);
 
-const trend = $.querySelector('.trend');
-$.querySelector('#header').append(div);
+$.querySelector('#app');
 
-$.querySelector('#app').append();
-
-getTrendingMoviesPreview()
-  .then(res => {
-    console.log(res);
-    res?.forEach(movie => {
+// Trend
+const trend = $.querySelector('#trend');
+getTrendingMoviesPreview({})
+  .then(movies => {
+    movies?.forEach(movie => {
       trend.appendChild(
         Poster(movie)
       );
-      return Poster(movie);
     });
   })
-  .catch(console.error)
-  .finally(console.log);
+  .catch(console.error);
+
+// Genres
+const categories = $.querySelector('#categories');
+getCategoriesPreview()
+  .then(genres => {
+    genres?.forEach(genre => {
+      categories.appendChild(
+        Category(genre)
+      );
+    });
+  });

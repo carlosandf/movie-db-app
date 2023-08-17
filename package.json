@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "vite build",
+    "build": "node ./src/utils/create_env.js && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {

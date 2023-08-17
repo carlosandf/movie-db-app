@@ -6,14 +6,14 @@
     <title>MovieDB App</title>
   </head>
   <body>
-    <header id="header"></header>
+    <!-- <header id="header"></header> -->
     <div id="app"></div>
 
     <style>
     </style>
 
     <main>
-      <section class="trend-container carousel">
+      <!-- <section class="trend-container carousel">
         <h3>Tendencias</h3>
         <section id="trend"></section>
       </section>
@@ -21,6 +21,37 @@
       <section class="categories-container carousel">
         <h3>Categorias</h3>
         <section id="categories"></section>
+      </section> -->
+
+      <section>
+        <style>
+          .headerDetail {
+            color: var(--brandColor);
+            position: fixed;
+            width: 100%;
+            min-height: 60dvh;
+            padding: 1rem;
+            padding-bottom: 3.5rem;
+            background-image: url('https://image.tmdb.org/t/p/w300//37WcNMgNOMxdhT87MFl7tq7FM1.jpg');
+            /* background: linear-gradient(180deg, black, #000000b8, #06060608); */
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+          }
+          .imageContainer {
+
+          }
+          .icon-tabler-chevron-left {
+            width: 3rem;
+            height: 3rem;
+          }
+        </style>
+        <header class="headerDetail">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M15 6l-6 6l6 6"></path>
+          </svg>
+        </header>
+
       </section>
     </main>
 

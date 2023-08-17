@@ -1,5 +1,5 @@
-import styles from './Header.module.css';
-import { Icon } from '../icon.js';
+import styles from './header.module.css';
+import { searchIcon } from '../icon.js';
 const $ = document;
 
 const title = $.createElement('h1');
@@ -24,7 +24,7 @@ const input = $.createElement('input');
 input.placeholder = 'Buscar...';
 
 const button = $.createElement('button');
-button.innerHTML = Icon({ fill: '#1762ee', width: '1.7rem' });
+button.innerHTML = searchIcon({ fill: '#1762ee', width: '1.7rem' });
 
 form.append(
   input,

@@ -1,5 +1,6 @@
 @import url('./styles/trend.css');
 @import url('./styles/categories.css');
+@import url('./styles/header.css');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -18,6 +19,7 @@
   --brandColor: #1762ee;
   --white: #c3c3c3;
   --secundary-text-color: #7e7e7e;
+  --bg-dark: #0b0a0a;
 }
 
 * {
@@ -32,7 +34,7 @@ html {
 
 body {
   min-width: 320px;
-  max-width: 1250px;
+  max-width: 65rem;
   min-height: 100vh;
   margin: 0 auto;
   position: relative;

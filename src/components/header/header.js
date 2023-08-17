@@ -1,51 +1,32 @@
-import styles from './header.module.css';
-import { searchIcon } from '../icon.js';
-const $ = document;
+const select = (query) => document.querySelector(query);
 
-const title = $.createElement('h1');
-title.id = 'nav-title';
+const header = select('.header');
+const gradientHeader = select('.gradient-header');
+const mainTitle = select('.main-title');
+const backIcon = select('.back-icon');
+const search = select('.search');
 
-title.className = styles['main-title'];
-const link = $.createElement('a');
-link.textContent = 'MovieApp';
-title.appendChild(
-  link
-);
+export function headerMovieDetail ({ poster }) {
+  header?.classList.add('header-movie-details');
+  gradientHeader?.classList.remove('inactive');
+  mainTitle?.classList.add('inactive');
+  backIcon?.classList.remove('inactive');
+  search?.classList.add('inactive');
 
-const nav = $.createElement('nav');
-nav.className = styles.nav;
-nav.id = '#nav';
-nav.appendChild(title);
+  backIcon.onclick = () => {
+    window.location.hash = '';
+  };
+  header.style.backgroundImage = `url(${poster})`;
+}
 
-const form = $.createElement('form');
-form.className = styles.search;
-
-const input = $.createElement('input');
-input.placeholder = 'Buscar...';
-
-const button = $.createElement('button');
-button.innerHTML = searchIcon({ fill: '#1762ee', width: '1.7rem' });
-
-form.append(
-  input,
-  button
-);
-
-export const headerContent = $.createElement('div');
-headerContent.className = styles.header;
-
-headerContent.append(
-  nav,
-  form
-);
-
-let dark = false;
-form.onsubmit = (e) => {
-  e.preventDefault();
-  dark = !dark;
-  document.body.style.backgroundColor = dark ? '#000' : '#fff';
-};
-
+export function headerHome () {
+  header?.classList.remove('header-movie-details');
+  gradientHeader?.classList.add('inactive');
+  mainTitle?.classList.remove('inactive');
+  backIcon?.classList.add('inactive');
+  search?.classList.remove('inactive');
+  header.style.backgroundImage = 'none';
+}
 /*
 <div class="">
   <nav class="nav" id="nav">

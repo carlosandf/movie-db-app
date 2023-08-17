@@ -19,6 +19,9 @@
   "eslintConfig": {
     "extends": [
       "semistandard"
-    ]
+    ],
+    "rules": {
+      "camelcase": "off"
+    }
   }
 }

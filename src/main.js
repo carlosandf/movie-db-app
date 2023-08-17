@@ -1,8 +1,10 @@
-// import { API_KEY } from './utils/constants.js';
-import { headerContent } from './components/header/header.js';
 import { Poster } from './components/poster/poster.js';
 import { Category } from './components/category/category.js';
+import { headerHome, headerMovieDetail } from './components/header/header.js';
+import { IMAGE_URL } from './utils/constants.js';
+import { movieDetails, homeContent } from './components/views/views.js';
 import {
+  findById,
   getCategoriesPreview,
   getTrendingMoviesPreview
 } from './services/movies-axios.js';
@@ -10,7 +12,7 @@ import {
 import '../style.css';
 
 const $ = document;
-$.querySelector('#header').append(headerContent);
+// $.querySelector('#header').append(headerContent);
 
 $.querySelector('#app');
 
@@ -19,7 +21,7 @@ const trend = $.querySelector('#trend');
 getTrendingMoviesPreview({})
   .then(movies => {
     movies?.forEach(movie => {
-      trend.appendChild(
+      trend?.appendChild(
         Poster(movie)
       );
     });
@@ -36,3 +38,20 @@ getCategoriesPreview()
       );
     });
   });
+
+window.onhashchange = (e) => navigation();
+
+function navigation () {
+  const hash = window.location.hash;
+  if (hash.includes('movie')) {
+    const id = hash.split('=').at(1);
+    findById({ id })
+      .then(movie => {
+        movieDetails();
+        headerMovieDetail({ poster: `${IMAGE_URL}/${movie?.poster_path}` });
+      });
+  } else if (hash === '') {
+    headerHome();
+    homeContent();
+  }
+}

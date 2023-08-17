@@ -37,3 +37,19 @@ export async function getCategoriesPreview () {
     console.error(error);
   }
 }
+
+export async function findById ({ id }) {
+  const url = `${BASE_URL}/movie/${id}?language=es`;
+
+  try {
+    const res = await fetch(url, getOptions);
+
+    if (!res.ok) throw Error(res);
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.error({ error });
+  }
+}

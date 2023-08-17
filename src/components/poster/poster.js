@@ -26,6 +26,10 @@ export const Poster = (movie) => {
   span.textContent = movie?.title;
   footer.appendChild(span);
 
+  article.onclick = () => {
+    window.location.hash = `movie=${movie?.id}`;
+  };
+
   article.append(
     figure,
     footer

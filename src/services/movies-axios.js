@@ -33,3 +33,15 @@ export async function getCategoriesPreview () {
     console.error(error);
   }
 }
+
+export async function findById ({ id }) {
+  try {
+    const res = await api.get(`/movie/${id}`);
+
+    if (res.status !== 200) throw Error(res);
+
+    return res?.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

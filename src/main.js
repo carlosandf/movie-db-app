@@ -48,8 +48,8 @@ function navigation () {
     const id = hash.split('=').at(1);
     findById({ id })
       .then(movie => {
-        movieDetails();
         headerMovieDetail({ poster: `${IMAGE_URL}/${movie?.poster_path}` });
+        movieDetails(movie);
       });
   } else if (hash === '') {
     headerHome();

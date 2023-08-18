@@ -1,0 +1,29 @@
+.info-container {
+  display: grid;
+  gap: 2rem;
+}
+
+.movie-title {
+  color: var(--brandColor);
+  font-size: 2.4rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.info {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.vote-average {
+  color: var(--text);
+  font-size: 1.8rem;
+  opacity: .8;
+  font-weight: 500;
+}
+
+.overview-text {
+  font-size: 1.6rem;
+  color: var(--text);
+  font-style: italic;
+}

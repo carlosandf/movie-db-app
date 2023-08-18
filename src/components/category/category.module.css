@@ -1,6 +1,9 @@
 .category {
+  display: grid;
+  place-items: center;
   color: #fff;
   padding: 0.75rem 1.5rem;
+  width: max-content;
   font-size: 1.5rem;
   background-color: var(--brandColor);
   border-radius: 50px;

@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #0b0a0a;
+  background-color: var(--bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,8 +18,12 @@
 
   --brandColor: #1762ee;
   --white: #c3c3c3;
+  --black: #474747;
   --secundary-text-color: #7e7e7e;
   --bg-dark: #0b0a0a;
+  --bg-light: #ffffff;
+  --text: var(--white);
+  --bg: var(--bg-dark)
 }
 
 * {
@@ -62,18 +66,13 @@ main {
 }
 .carousel > h3 {
   font-size: 2rem;
-  color: var(--white);
+  color: var(--text);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    background-color: var(--bg-light);
+    --text: var(--black);
+    --bg: var(--bg-light)
   }
-  a:hover {
-    color: #e5e5e5;
-  }
-  /* button {
-    background-color: #f9f9f9;
-  } */
 }

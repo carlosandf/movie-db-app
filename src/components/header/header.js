@@ -27,16 +27,3 @@ export function headerHome () {
   search?.classList.remove('inactive');
   header.style.backgroundImage = 'none';
 }
-/*
-<div class="">
-  <nav class="nav" id="nav">
-    <h1 class="main-title">
-      <a href="/">MovieApp</a>
-    </h1>
-  </nav>
-  <form class="search">
-    <input placeholder="Buscar..." type="text" />
-    <button>🔍</button>
-  </form>
-</div>
-*/

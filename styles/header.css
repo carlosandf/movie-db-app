@@ -111,7 +111,7 @@
   min-height: 60dvh;
   position: relative;
   padding: 1.4rem;
-  background: var(--bg-dark);
+  background-color: var(--bg-dark);
   border-radius: 20px;
   top: 65dvh;
   padding-bottom: 3.5rem;
@@ -122,4 +122,16 @@
   height: 3rem;
   stroke-width: 2;
   color: var(--brandColor);
+}
+
+@media (prefers-color-scheme: light) {
+  .section-movie-detail {
+    background-color: var(--bg-light);
+  }
+  a:hover {
+    color: #e5e5e5;
+  }
+  /* button {
+    background-color: #f9f9f9;
+  } */
 }

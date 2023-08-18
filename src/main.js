@@ -39,7 +39,8 @@ getCategoriesPreview()
     });
   });
 
-window.onhashchange = (e) => navigation();
+window.onhashchange = navigation;
+window.addEventListener('DOMContentLoaded', navigation);
 
 function navigation () {
   const hash = window.location.hash;

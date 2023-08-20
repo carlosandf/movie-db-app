@@ -1,0 +1,19 @@
+.carousel {
+  display: flex;
+  gap: 2rem;
+  flex-direction: row;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+
+.carousel::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+.carousel::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+.carousel::-webkit-scrollbar-thumb {
+  background-color: #9b9b9b5d;
+  border-radius: 20px;
+}

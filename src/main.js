@@ -1,10 +1,10 @@
 import { Poster } from './components/poster/poster.js';
 import { Category } from './components/category/category.js';
-import { headerHome, headerMovieDetail } from './components/header/header.js';
-import { IMAGE_URL } from './utils/constants.js';
-import { movieDetails, homeContent } from './components/views/views.js';
+import { movieDetails, homeContent, moviesByCategory } from './components/views/views.js';
+import { carousel } from './components/carousel/carousel.js';
 import {
   findById,
+  findAllByCategory,
   getCategoriesPreview,
   getTrendingMoviesPreview
 } from './services/movies-axios.js';
@@ -18,11 +18,14 @@ $.querySelector('#app');
 
 // Trend
 const trend = $.querySelector('#trend');
+const trendCarousel = carousel();
+trend.appendChild(trendCarousel);
+
 getTrendingMoviesPreview({})
   .then(movies => {
     movies?.forEach(movie => {
-      trend?.appendChild(
-        Poster(movie)
+      trendCarousel?.appendChild(
+        Poster({ movie })
       );
     });
   })
@@ -45,14 +48,16 @@ window.addEventListener('DOMContentLoaded', navigation);
 function navigation () {
   const hash = window.location.hash;
   if (hash.includes('movie')) {
-    const id = hash.split('=').at(1);
-    findById({ id })
-      .then(movie => {
-        headerMovieDetail({ poster: `${IMAGE_URL}/${movie?.poster_path}` });
-        movieDetails(movie);
-      });
+    const id = hash.split('/').at(1);
+
+    findById({ id }).then(movie => movieDetails(movie));
+  } else if (hash.includes('category')) {
+    const categoryId = hash.split('/').at(2);
+    const categoryName = hash.split('/').at(1);
+
+    findAllByCategory({ id: categoryId })
+      .then(movies => moviesByCategory({ movies, categoryName }));
   } else if (hash === '') {
-    headerHome();
     homeContent();
   }
 }

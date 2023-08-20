@@ -8,6 +8,7 @@
   background-color: var(--brandColor);
   border-radius: 50px;
   text-align: center;
+  cursor: pointer;
 }
 .category > a {
   color: #fff;

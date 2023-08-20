@@ -53,3 +53,22 @@ export async function findById ({ id }) {
     console.error({ error });
   }
 }
+
+export async function findAllByCategory ({ id, page = 1 }) {
+  const url = `${BASE_URL}/discover/movie?with_genres=${id}&page=${page}`;
+
+  try {
+    const res = await fetch(url, getOptions);
+
+    if (!res.ok) throw Error(res);
+
+    const data = res.json();
+
+    if (page >= data?.total_page) return [];
+    return data?.results;
+  } catch (error) {
+    console.error({ error });
+  }
+}
+
+// https://api.themoviedb.org/3/discover/movie

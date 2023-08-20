@@ -1,3 +1,5 @@
+import { scrollY } from '../poster/poster.js';
+
 const select = (query) => document.querySelector(query);
 
 const header = select('.header');
@@ -12,11 +14,13 @@ export function headerMovieDetail ({ poster }) {
   mainTitle?.classList.add('inactive');
   backIcon?.classList.remove('inactive');
   search?.classList.add('inactive');
+  header.style.backgroundImage = `url(${poster})`;
 
   backIcon.onclick = () => {
-    window.location.hash = '';
+    window.history.back();
+
+    setTimeout(() => window.scroll(scrollY, scrollY), 100);
   };
-  header.style.backgroundImage = `url(${poster})`;
 }
 
 export function headerHome () {
@@ -26,4 +30,16 @@ export function headerHome () {
   backIcon?.classList.add('inactive');
   search?.classList.remove('inactive');
   header.style.backgroundImage = 'none';
+}
+
+export function headerGenericList () {
+  header?.classList.remove('header-movie-details');
+  mainTitle?.classList.add('inactive');
+  backIcon?.classList.remove('inactive');
+  search?.classList.add('inactive');
+  header.style.backgroundImage = 'none';
+
+  backIcon.onclick = () => {
+    window.history.back();
+  };
 }

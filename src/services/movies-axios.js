@@ -45,3 +45,16 @@ export async function findById ({ id }) {
     console.error(error);
   }
 }
+
+export async function findAllByCategory ({ id, page = 1 }) {
+  try {
+    const res = await api.get(`/discover/movie?with_genres=${id}&page=${page}`);
+
+    if (res.status !== 200) throw Error(res);
+
+    if (page >= res?.data?.total_page) return [];
+    return res?.data.results;
+  } catch (error) {
+    console.error(error);
+  }
+}

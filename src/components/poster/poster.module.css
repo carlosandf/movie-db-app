@@ -10,6 +10,7 @@
   overflow: hidden;
   cursor: pointer;
 }
+
 .figure > img {
   width: 100%;
   object-fit: cover;
@@ -17,6 +18,10 @@
 }
 .figure > img:hover {
   opacity: .4;
+}
+
+.figure-generic-list {
+  width: 100%;
 }
 
 .posterFooter {

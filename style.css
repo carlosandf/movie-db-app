@@ -59,13 +59,14 @@ main {
   display: none !important;
 }
 
-.carousel {
+.list-container {
   display: grid;
   gap: 1rem;
   padding: 1.4rem;
 }
-.carousel > h3 {
+.list-container > h3 {
   font-size: 2rem;
+  text-transform: capitalize;
   color: var(--text);
 }
 

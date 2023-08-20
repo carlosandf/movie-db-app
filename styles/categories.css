@@ -3,3 +3,9 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+#generic-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}

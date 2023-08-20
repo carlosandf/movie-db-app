@@ -1,4 +1,5 @@
 import { IMAGE_URL } from '../../utils/constants.js';
+import { setLocationHash } from '../../utils/set_location_hash.js';
 import styles from './poster.module.css';
 /*
 <article>
@@ -8,11 +9,16 @@ import styles from './poster.module.css';
 </article>
 */
 const $ = document;
-export const Poster = (movie) => {
+
+export let scrollY;
+
+export const Poster = ({ movie, generic }) => {
   const article = $.createElement('article');
   article.className = styles['movie-item'];
   const figure = $.createElement('figure');
   figure.className = styles.figure;
+
+  if (generic) figure.classList.add(styles['figure-generic-list']);
 
   const img = $.createElement('img');
   img.src = `${IMAGE_URL}/${movie?.poster_path}`;
@@ -27,7 +33,8 @@ export const Poster = (movie) => {
   footer.appendChild(span);
 
   article.onclick = () => {
-    window.location.hash = `movie=${movie?.id}`;
+    scrollY = window.scrollY;
+    setLocationHash(`movie/${movie?.id}`);
   };
 
   article.append(

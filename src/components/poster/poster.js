@@ -19,7 +19,7 @@ export const Poster = ({ movie, generic }) => {
   if (generic) figure.classList.add(styles['figure-generic-list']);
 
   const img = $.createElement('img');
-  img.src = `${IMAGE_URL}/${movie?.poster_path}`;
+  img.src = `${IMAGE_URL}${movie?.poster_path}`;
   img.alt = movie?.title;
 
   figure.appendChild(img);

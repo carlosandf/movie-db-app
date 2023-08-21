@@ -24,7 +24,7 @@ export const movieDetails = ({ title, overview, vote_average, poster_path }) => 
   detailsContainer.classList.remove('inactive');
   genericListConteiner.classList.add('inactive');
 
-  headerMovieDetail({ poster: `${IMAGE_URL}/${poster_path}` });
+  headerMovieDetail({ poster: `${IMAGE_URL}${poster_path}` });
   movieInfo({ title, overview, vote_average });
 };
 

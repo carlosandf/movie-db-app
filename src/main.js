@@ -1,7 +1,8 @@
 import { Poster } from './components/poster/poster.js';
-import { Category, currentCategory } from './components/category/category.js';
+import { Category } from './components/category/category.js';
 import { movieDetails, homeContent, moviesByCategory } from './components/views/views.js';
 import { carousel } from './components/carousel/carousel.js';
+
 import {
   findById,
   findAllByCategory,
@@ -10,6 +11,7 @@ import {
 } from './services/movies-axios.js';
 
 import '../style.css';
+import { getFromLocalStorage } from './utils/local_storage.js';
 
 const $ = document;
 // $.querySelector('#header').append(headerContent);
@@ -47,16 +49,21 @@ window.addEventListener('DOMContentLoaded', navigation);
 
 function navigation () {
   const hash = window.location.hash;
+
   if (hash.includes('movie')) {
     const id = hash.split('/').at(1);
 
     findById({ id }).then(movie => movieDetails(movie));
   } else if (hash.includes('category')) {
-    const categoryId = hash.split('/').at(2);
+    const [, , categoryId] = hash.split('/');
+    const categoryName = getFromLocalStorage('category');
 
     findAllByCategory({ id: categoryId })
-      .then(movies => moviesByCategory({ movies, categoryName: currentCategory }));
+      .then(movies => {
+        moviesByCategory({ movies, categoryName });
+      });
   } else if (hash === '') {
     homeContent();
   }
+  window.scroll({ top: 0 });
 }

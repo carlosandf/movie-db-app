@@ -6,6 +6,8 @@ import styles from './category.module.css';
 </span>
 */
 const $ = document;
+
+export let currentCategory = '';
 export function Category ({ name, id }) {
   const span = $.createElement('span');
   span.className = styles.category;
@@ -17,7 +19,11 @@ export function Category ({ name, id }) {
   span.appendChild(link);
 
   const url = formatUrl(name);
-  span.onclick = () => setLocationHash(`category/${url}/${id}`);
+  span.onclick = () => {
+    currentCategory = name;
+    window.scroll(0, 0);
+    setLocationHash(`category/${url}/${id}`);
+  };
 
   return span;
 }

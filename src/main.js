@@ -1,5 +1,5 @@
 import { Poster } from './components/poster/poster.js';
-import { Category } from './components/category/category.js';
+import { Category, currentCategory } from './components/category/category.js';
 import { movieDetails, homeContent, moviesByCategory } from './components/views/views.js';
 import { carousel } from './components/carousel/carousel.js';
 import {
@@ -53,10 +53,9 @@ function navigation () {
     findById({ id }).then(movie => movieDetails(movie));
   } else if (hash.includes('category')) {
     const categoryId = hash.split('/').at(2);
-    const categoryName = hash.split('/').at(1);
 
     findAllByCategory({ id: categoryId })
-      .then(movies => moviesByCategory({ movies, categoryName }));
+      .then(movies => moviesByCategory({ movies, categoryName: currentCategory }));
   } else if (hash === '') {
     homeContent();
   }

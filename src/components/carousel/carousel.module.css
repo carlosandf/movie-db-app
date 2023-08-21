@@ -5,6 +5,7 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
+  padding: 1rem 0;
 }
 
 .carousel::-webkit-scrollbar {

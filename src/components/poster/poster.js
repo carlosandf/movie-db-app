@@ -10,8 +10,6 @@ import styles from './poster.module.css';
 */
 const $ = document;
 
-export let scrollY;
-
 export const Poster = ({ movie, generic }) => {
   const article = $.createElement('article');
   article.className = styles['movie-item'];
@@ -26,20 +24,16 @@ export const Poster = ({ movie, generic }) => {
 
   figure.appendChild(img);
 
-  const footer = $.createElement('footer');
-  footer.className = styles.posterFooter;
-  const span = $.createElement('span');
-  span.textContent = movie?.title;
-  footer.appendChild(span);
+  // const footer = $.createElement('footer');
+  // footer.className = styles.posterFooter;
+  // const span = $.createElement('span');
+  // span.textContent = movie?.title;
+  // footer.appendChild(span);
 
   article.onclick = () => {
-    scrollY = window.scrollY;
     setLocationHash(`movie/${movie?.id}`);
   };
 
-  article.append(
-    figure,
-    footer
-  );
+  article.append(figure);
   return article;
 };

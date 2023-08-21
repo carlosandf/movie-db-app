@@ -3,7 +3,7 @@
 }
 .figure {
   background-color: #080808;
-  /* aspect-ratio: 9/14; */
+  aspect-ratio: 9/14;
   display: flex;
   border-radius: 5px;
   width: 16rem;

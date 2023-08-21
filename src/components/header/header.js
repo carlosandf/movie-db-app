@@ -1,4 +1,4 @@
-import { scrollY } from '../poster/poster.js';
+import { removeFromLocalStorage } from '../../utils/local_storage.js';
 
 const select = (query) => document.querySelector(query);
 
@@ -16,11 +16,7 @@ export function headerMovieDetail ({ poster }) {
   search?.classList.add('inactive');
   header.style.backgroundImage = `url(${poster})`;
 
-  backIcon.onclick = () => {
-    window.history.back();
-
-    setTimeout(() => window.scroll(scrollY, scrollY), 100);
-  };
+  backIcon.onclick = () => window.history.back();
 }
 
 export function headerHome () {
@@ -40,6 +36,7 @@ export function headerGenericList () {
   header.style.backgroundImage = 'none';
 
   backIcon.onclick = () => {
+    removeFromLocalStorage('category');
     window.history.back();
   };
 }

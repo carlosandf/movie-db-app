@@ -1,4 +1,6 @@
 import { setLocationHash } from '../../utils/set_location_hash.js';
+import { saveOnLocalStorage } from '../../utils/local_storage.js';
+import { formatUrl } from '../../utils/format_url.js';
 import styles from './category.module.css';
 /*
 <span class="category">
@@ -7,7 +9,6 @@ import styles from './category.module.css';
 */
 const $ = document;
 
-export let currentCategory = '';
 export function Category ({ name, id }) {
   const span = $.createElement('span');
   span.className = styles.category;
@@ -20,20 +21,9 @@ export function Category ({ name, id }) {
 
   const url = formatUrl(name);
   span.onclick = () => {
-    currentCategory = name;
-    window.scroll(0, 0);
+    saveOnLocalStorage('category', name);
     setLocationHash(`category/${url}/${id}`);
   };
 
   return span;
-}
-
-function formatUrl (string) {
-  const url = string
-    .split(' ')
-    .join('-')
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // quitar acentos: Á -> A
-
-  return url;
 }

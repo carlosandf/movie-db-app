@@ -1,4 +1,3 @@
-import { IMAGE_URL } from '../../utils/constants.js';
 import { saveOnLocalStorage } from '../../utils/local_storage.js';
 import { headerGenericList, headerHome, headerMovieDetail } from '../header/header.js';
 import { movieInfo } from '../movie_details/movie_detail.js';
@@ -24,19 +23,19 @@ export const movieDetails = ({ title, overview, vote_average, poster_path }) => 
   detailsContainer.classList.remove('inactive');
   genericListConteiner.classList.add('inactive');
 
-  headerMovieDetail({ poster: `${IMAGE_URL}${poster_path}` });
+  headerMovieDetail({ poster_path });
   movieInfo({ title, overview, vote_average });
 };
 
-export const moviesByCategory = ({ movies, categoryName }) => {
+export const genericListView = ({ movies, name }) => {
   home.classList.add('inactive');
   genericListConteiner.classList.remove('inactive');
   detailsContainer.classList.add('inactive');
 
   const title = genericListConteiner.children[0];
-  title.textContent = categoryName;
+  title.textContent = name;
 
-  saveOnLocalStorage('category', categoryName);
+  saveOnLocalStorage('category', name);
 
   genericList.innerHTML = '';
   headerGenericList();

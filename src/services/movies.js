@@ -17,6 +17,7 @@ export async function getTrendingMoviesPreview ({ page = 1 }) {
     if (!res.ok) throw Error(res);
 
     const data = await res.json();
+    if (page > data?.total_pages) return [];
     return data?.results;
   } catch (error) {
     console.error(error);
@@ -64,11 +65,26 @@ export async function findAllByCategory ({ id, page = 1 }) {
 
     const data = res.json();
 
-    if (page >= data?.total_page) return [];
+    if (page > data?.total_pages) return [];
     return data?.results;
   } catch (error) {
     console.error({ error });
   }
 }
 
-// https://api.themoviedb.org/3/discover/movie
+export async function searchByMovieName ({ query, page = 1 }) {
+  const url = `${BASE_URL}/search/movie?query=${query}&page=${page}`;
+
+  try {
+    const res = await fetch(url, getOptions);
+
+    if (!res.ok) throw Error(res);
+
+    const data = res.json();
+
+    if (page > data?.total_pages) return [];
+    return data?.results;
+  } catch (error) {
+    console.error({ error });
+  }
+}

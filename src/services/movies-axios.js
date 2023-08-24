@@ -16,6 +16,7 @@ export async function getTrendingMoviesPreview ({ page = 1 }) {
 
     if (res.status !== 200) throw Error(res);
 
+    if (page > res?.data?.total_pages) return [];
     return res?.data?.results;
   } catch (error) {
     console.error(error);
@@ -52,8 +53,22 @@ export async function findAllByCategory ({ id, page = 1 }) {
 
     if (res.status !== 200) throw Error(res);
 
-    if (page >= res?.data?.total_page) return [];
+    if (page > res?.data?.total_pages) return [];
     return res?.data.results;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function searchByMovieName ({ query, page = 1 }) {
+  try {
+    const res = await api.get(`/search/movie?query=${query}`);
+
+    if (res.status !== 200) throw Error(res);
+
+    if (page > res?.data?.total_pages) return [];
+
+    return res?.data?.results;
   } catch (error) {
     console.error(error);
   }

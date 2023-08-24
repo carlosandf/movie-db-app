@@ -1,22 +1,30 @@
 import { Poster } from './components/poster/poster.js';
 import { Category } from './components/category/category.js';
-import { movieDetails, homeContent, moviesByCategory } from './components/views/views.js';
+import { movieDetails, homeContent, genericListView } from './components/views/views.js';
 import { carousel } from './components/carousel/carousel.js';
+import { getFromLocalStorage } from './utils/local_storage.js';
+import { searchMovies } from './services/search_form/search_form.js';
 
 import {
   findById,
   findAllByCategory,
   getCategoriesPreview,
-  getTrendingMoviesPreview
+  getTrendingMoviesPreview,
+  searchByMovieName
 } from './services/movies-axios.js';
 
 import '../style.css';
-import { getFromLocalStorage } from './utils/local_storage.js';
 
 const $ = document;
 // $.querySelector('#header').append(headerContent);
 
-$.querySelector('#app');
+// search input
+const searchForm = $.querySelector('#search_form');
+searchForm.onsubmit = (e) => {
+  e.preventDefault();
+
+  searchMovies(e.target);
+};
 
 // Trend
 const trend = $.querySelector('#trend');
@@ -56,11 +64,18 @@ function navigation () {
     findById({ id }).then(movie => movieDetails(movie));
   } else if (hash.includes('category')) {
     const [, , categoryId] = hash.split('/');
-    const categoryName = getFromLocalStorage('category');
+    const name = getFromLocalStorage('category');
 
     findAllByCategory({ id: categoryId })
       .then(movies => {
-        moviesByCategory({ movies, categoryName });
+        genericListView({ movies, name });
+      });
+  } else if (hash.includes('search')) {
+    const query = hash.split('=').at(1);
+    const name = query.split('%20').join(' ');
+    searchByMovieName({ query })
+      .then(movies => {
+        genericListView({ movies, name });
       });
   } else if (hash === '') {
     homeContent();

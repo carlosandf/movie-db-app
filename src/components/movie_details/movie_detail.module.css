@@ -21,9 +21,29 @@
   opacity: .8;
   font-weight: 500;
 }
+.vote-average::before {
+  content: '★';
+  color: var(--yellow);
+  font-size: 2rem;
+  padding-right: 4px;
+}
 
 .overview-text {
   font-size: 1.6rem;
   color: var(--text);
   font-style: italic;
+}
+
+.categories-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.related-movies-container {
+  overflow-x: hidden;
+}
+.related-movies-container > h3 {
+  font-size: 1.8rem;
+  color: var(--text);
 }

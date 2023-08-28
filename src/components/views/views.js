@@ -18,13 +18,13 @@ export const homeContent = () => {
   headerHome();
 };
 
-export const movieDetails = ({ title, overview, vote_average, poster_path }) => {
+export const movieDetails = (movie) => {
   home.classList.add('inactive');
   detailsContainer.classList.remove('inactive');
   genericListConteiner.classList.add('inactive');
 
-  headerMovieDetail({ poster_path });
-  movieInfo({ title, overview, vote_average });
+  headerMovieDetail({ poster_path: movie.poster_path });
+  movieInfo(movie);
 };
 
 export const genericListView = ({ movies, name }) => {

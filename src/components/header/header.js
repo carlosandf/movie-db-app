@@ -30,11 +30,13 @@ export function headerHome () {
   header.style.backgroundImage = 'none';
 }
 
-export function headerGenericList () {
+export function headerGenericList ({ searchActive = false }) {
   header?.classList.remove('header-movie-details');
   mainTitle?.classList.add('inactive');
   backIcon?.classList.remove('inactive');
-  search?.classList.add('inactive');
+
+  if (!searchActive) search?.classList.add('inactive');
+
   header.style.backgroundImage = 'none';
 
   backIcon.onclick = () => {

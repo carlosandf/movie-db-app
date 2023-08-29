@@ -73,3 +73,17 @@ export async function searchByMovieName ({ query, page = 1 }) {
     console.error(error);
   }
 }
+
+export async function getRelatedMovies ({ movieId, page = 1 }) {
+  try {
+    const res = await api.get(`/movie/${movieId}/recommendations?page=${page}`);
+
+    if (res.status !== 200) throw Error(res);
+
+    if (page > res?.data?.total_pages) return [];
+
+    return res?.data?.results;
+  } catch (error) {
+    console.error(error);
+  }
+}

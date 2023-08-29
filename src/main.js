@@ -40,6 +40,18 @@ getTrendingMoviesPreview({})
     });
   })
   .catch(console.error);
+// let page = 1;
+// trendCarousel.onscroll = async (e) => {
+//   if ((e.target.scrollLeft) >= (e.target.scrollWidth - e.target.clientWidth)) {
+//     const newRelatedMovies = await getTrendingMoviesPreview({ page: page + 1 });
+//     newRelatedMovies?.forEach(movie => {
+//       trendCarousel.appendChild(
+//         Poster({ movie })
+//       );
+//     });
+//     page++;
+//   }
+// };
 
 // Genres
 const categories = $.querySelector('#categories');
@@ -75,7 +87,7 @@ function navigation () {
     const name = query.split('%20').join(' ');
     searchByMovieName({ query })
       .then(movies => {
-        genericListView({ movies, name });
+        genericListView({ movies, name, searchActive: true });
       });
   } else if (hash === '') {
     homeContent();

@@ -27,7 +27,7 @@ export const movieDetails = (movie) => {
   movieInfo(movie);
 };
 
-export const genericListView = ({ movies, name }) => {
+export const genericListView = ({ movies, name, searchActive = 'inactive' }) => {
   home.classList.add('inactive');
   genericListConteiner.classList.remove('inactive');
   detailsContainer.classList.add('inactive');
@@ -38,7 +38,7 @@ export const genericListView = ({ movies, name }) => {
   saveOnLocalStorage('category', name);
 
   genericList.innerHTML = '';
-  headerGenericList();
+  headerGenericList({ searchActive });
 
   movies?.forEach(movie => {
     genericList.appendChild(

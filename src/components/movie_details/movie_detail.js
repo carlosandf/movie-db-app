@@ -1,3 +1,4 @@
+import { getRelatedMovies } from '../../services/movies-axios.js';
 import { carousel } from '../carousel/carousel.js';
 import { Category } from '../category/category.js';
 import { Poster } from '../poster/poster.js';
@@ -37,7 +38,7 @@ infoContainer.append(
   info
 );
 
-export function movieInfo ({ title, overview, vote_average, genres }) {
+export async function movieInfo ({ title, overview, vote_average, genres, id }) {
   movieTitle.textContent = title;
 
   const average = Number(vote_average);
@@ -48,7 +49,9 @@ export function movieInfo ({ title, overview, vote_average, genres }) {
   categoriesContainer.textContent = '';
   genres.forEach(genre => categoriesContainer.appendChild(Category(genre)));
 
-  const relatedMovies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  let page = 1;
+  const relatedMovies = await getRelatedMovies({ movieId: id });
+
   if (relatedMovies.length > 0) {
     const carouselContainer = carousel();
 
@@ -63,5 +66,19 @@ export function movieInfo ({ title, overview, vote_average, genres }) {
         Poster({ movie })
       );
     });
+
+    carouselContainer.onscroll = async (e) => {
+      if ((e.target.scrollLeft) >= (e.target.scrollWidth - e.target.clientWidth)) {
+        const newRelatedMovies = await getRelatedMovies({ movieId: id, page: page + 1 });
+        newRelatedMovies?.forEach((movie, index) => {
+          if (index < newRelatedMovies.length - 1) {
+            carouselContainer.appendChild(
+              Poster({ movie: newRelatedMovies[index + 1] })
+            );
+          }
+        });
+        page++;
+      }
+    };
   }
 }

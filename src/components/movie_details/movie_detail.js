@@ -24,8 +24,11 @@ overviewText.className = styles['overview-text'];
 const categoriesContainer = $.createElement('section');
 categoriesContainer.className = styles['categories-container'];
 
-const relatedMoviesContainer = $.querySelector('#related-movies');
-relatedMoviesContainer.classList.add(styles['related-movies-container'], 'inactive');
+const relatedMoviesContainer = $.querySelector('#related-movies-container');
+relatedMoviesContainer.className = styles['related-movies-container'];
+
+const relatedMovies = $.querySelector('#related-movies');
+relatedMovies.className = styles['related-movies'];
 
 info.append(
   voteAverage,
@@ -38,7 +41,8 @@ infoContainer.append(
   info
 );
 
-export async function movieInfo ({ title, overview, vote_average, genres, id }) {
+export function movieInfo ({ title, overview, vote_average, genres, id }) {
+  relatedMoviesContainer.classList.add('inactive');
   movieTitle.textContent = title;
 
   const average = Number(vote_average);
@@ -47,38 +51,60 @@ export async function movieInfo ({ title, overview, vote_average, genres, id }) 
   overviewText.textContent = overview;
 
   categoriesContainer.textContent = '';
-  genres.forEach(genre => categoriesContainer.appendChild(Category(genre)));
+  genres?.forEach(genre => categoriesContainer.appendChild(Category(genre)));
 
-  let page = 1;
-  const relatedMovies = await getRelatedMovies({ movieId: id });
+  // const page = 1;
+  const target = document.createElement('div');
 
-  if (relatedMovies.length > 0) {
-    const carouselContainer = carousel();
+  relatedMovies.setHTML('');
+  const carouselContainer = carousel();
+  relatedMovies.append(carouselContainer, target);
 
-    if (relatedMoviesContainer.children[1]) {
-      relatedMoviesContainer.removeChild(relatedMoviesContainer.children[1]);
+  infiniteScroll(target, async () => {
+    const moviesData = await getRelatedMovies({ movieId: id });
+
+    if (moviesData.length > 0) {
+      relatedMoviesContainer.classList.remove('inactive');
+
+      moviesData?.forEach(movie => {
+        carouselContainer.appendChild(
+          Poster({ movie })
+        );
+      });
     }
-    relatedMoviesContainer.classList.remove('inactive');
-    relatedMoviesContainer.append(carouselContainer);
+  });
 
-    relatedMovies?.forEach(movie => {
-      carouselContainer.appendChild(
-        Poster({ movie })
-      );
-    });
+  // carouselContainer.onscroll = async (e) => {
+  //   if ((e.target.scrollLeft) >= (e.target.scrollWidth - e.target.clientWidth)) {
+  //     const newRelatedMovies = await getRelatedMovies({ movieId: id, page: page + 1 });
+  //     newRelatedMovies?.forEach((movie, index) => {
+  //       if (index < newRelatedMovies.length - 1) {
+  //         carouselContainer.appendChild(
+  //           Poster({ movie: newRelatedMovies[index + 1] })
+  //         );
+  //       }
+  //     });
+  //     page++;
+  //   }
+  // };
+}
 
-    carouselContainer.onscroll = async (e) => {
-      if ((e.target.scrollLeft) >= (e.target.scrollWidth - e.target.clientWidth)) {
-        const newRelatedMovies = await getRelatedMovies({ movieId: id, page: page + 1 });
-        newRelatedMovies?.forEach((movie, index) => {
-          if (index < newRelatedMovies.length - 1) {
-            carouselContainer.appendChild(
-              Poster({ movie: newRelatedMovies[index + 1] })
-            );
-          }
-        });
-        page++;
+export function infiniteScroll (target, callback) {
+  const observerOptions = {
+    rootMargin: '25px',
+    threshold: 0.5
+  };
+  callback();
+  const io = new window.IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        return;
       }
-    };
-  }
+      if (entry.isIntersecting) {
+        callback();
+        console.log(entries);
+      }
+    });
+  }, observerOptions);
+  io.observe(target);
 }

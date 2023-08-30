@@ -27,7 +27,7 @@ export const movieDetails = (movie) => {
   movieInfo(movie);
 };
 
-export const genericListView = ({ movies, name, searchActive = 'inactive' }) => {
+export const genericListView = ({ movies, name, searchActive }) => {
   home.classList.add('inactive');
   genericListConteiner.classList.remove('inactive');
   detailsContainer.classList.add('inactive');

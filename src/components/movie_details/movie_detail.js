@@ -55,24 +55,35 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
 
   // const page = 1;
   const target = document.createElement('div');
+  target.style.width = '10px';
 
   relatedMovies.setHTML('');
   const carouselContainer = carousel();
-  relatedMovies.append(carouselContainer, target);
+  relatedMovies.append(carouselContainer);
 
-  infiniteScroll(target, async () => {
-    const moviesData = await getRelatedMovies({ movieId: id });
+  let page = 1;
+  let movies = [];
+
+  const io = infiniteScroll(async () => {
+    console.log('callback ejecutado');
+    const moviesData = await getRelatedMovies({ movieId: id, page: page++ });
 
     if (moviesData.length > 0) {
+      movies = [...movies, ...moviesData];
       relatedMoviesContainer.classList.remove('inactive');
 
       moviesData?.forEach(movie => {
-        carouselContainer.appendChild(
-          Poster({ movie })
-        );
+        if (movie.id !== movies.at(-1).id) {
+          carouselContainer.appendChild(
+            Poster({ movie })
+          );
+        }
       });
+      carouselContainer.appendChild(target);
     }
+    if (moviesData.length === 0) target.remove();
   });
+  io.observe(target);
 
   // carouselContainer.onscroll = async (e) => {
   //   if ((e.target.scrollLeft) >= (e.target.scrollWidth - e.target.clientWidth)) {
@@ -89,22 +100,8 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
   // };
 }
 
-export function infiniteScroll (target, callback) {
-  const observerOptions = {
-    rootMargin: '25px',
-    threshold: 0.5
-  };
-  callback();
-  const io = new window.IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-      if (entry.isIntersecting) {
-        callback();
-        console.log(entries);
-      }
-    });
-  }, observerOptions);
-  io.observe(target);
+export function infiniteScroll (callback) {
+  const io = new window.IntersectionObserver(() => callback());
+
+  return io;
 }

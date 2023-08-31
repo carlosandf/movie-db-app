@@ -57,7 +57,7 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
   const target = document.createElement('div');
   target.style.width = '10px';
 
-  relatedMovies.setHTML('');
+  relatedMovies.innerHTML = '';
   const carouselContainer = carousel();
   relatedMovies.append(carouselContainer);
 
@@ -65,7 +65,6 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
   let movies = [];
 
   const io = infiniteScroll(async () => {
-    console.log('callback ejecutado');
     const moviesData = await getRelatedMovies({ movieId: id, page: page++ });
 
     if (moviesData.length > 0) {

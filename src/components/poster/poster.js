@@ -1,4 +1,4 @@
-import { IMAGE_URL } from '../../utils/constants.js';
+import { getImage } from '../../utils/constants.js';
 import imageNotFound from '../../../public/image_not_found.jpg';
 import { setLocationHash } from '../../utils/set_location_hash.js';
 import styles from './poster.module.css';
@@ -20,7 +20,7 @@ export const Poster = ({ movie, generic }) => {
   if (generic) figure.classList.add(styles['figure-generic-list']);
 
   const img = $.createElement('img');
-  img.src = movie?.poster_path ? `${IMAGE_URL}${movie?.poster_path}` : imageNotFound;
+  img.src = movie?.poster_path ? getImage({ size: 300, path: movie.poster_path }) : imageNotFound;
   img.alt = movie?.title;
 
   figure.appendChild(img);

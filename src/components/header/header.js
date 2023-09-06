@@ -1,5 +1,5 @@
 import imageNotFound from '../../../public/image_not_found.jpg';
-import { IMAGE_URL } from '../../utils/constants.js';
+import { getImage } from '../../utils/constants.js';
 import { removeFromLocalStorage } from '../../utils/local_storage.js';
 
 const select = (query) => document.querySelector(query);
@@ -9,6 +9,7 @@ const gradientHeader = select('.gradient-header');
 const mainTitle = select('.main-title');
 const backIcon = select('.back-icon');
 const search = select('.search');
+const headerImg = select('.header-movie-image');
 
 export function headerMovieDetail ({ poster_path }) {
   header?.classList.add('header-movie-details');
@@ -16,7 +17,7 @@ export function headerMovieDetail ({ poster_path }) {
   mainTitle?.classList.add('inactive');
   backIcon?.classList.remove('inactive');
   search?.classList.add('inactive');
-  header.style.backgroundImage = `url(${poster_path ? `${IMAGE_URL}${poster_path}` : imageNotFound})`;
+  headerImg.src = `${poster_path ? getImage({ path: poster_path }) : imageNotFound}`;
 
   backIcon.onclick = () => window.history.back();
 }

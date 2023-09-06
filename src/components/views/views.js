@@ -23,7 +23,7 @@ export const movieDetails = (movie) => {
   detailsContainer.classList.remove('inactive');
   genericListConteiner.classList.add('inactive');
 
-  headerMovieDetail({ poster_path: movie.poster_path });
+  headerMovieDetail({ poster_path: movie.backdrop_path });
   movieInfo(movie);
 };
 

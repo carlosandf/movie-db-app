@@ -65,15 +65,16 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
   let movies = [];
 
   const io = infiniteScroll(async () => {
-    console.log('callback ejecutado');
     const moviesData = await getRelatedMovies({ movieId: id, page: page++ });
 
     if (moviesData.length > 0) {
+      console.log(moviesData);
       movies = [...movies, ...moviesData];
       relatedMoviesContainer.classList.remove('inactive');
 
       moviesData?.forEach(movie => {
-        if (movie.id !== movies.at(-1).id) {
+        if (movie.id !== movies.at(-1).id || movies.length === 1) {
+          console.log('se está ejecutando');
           carouselContainer.appendChild(
             Poster({ movie })
           );

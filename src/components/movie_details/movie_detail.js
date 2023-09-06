@@ -57,14 +57,14 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
   const target = document.createElement('div');
   target.style.width = '10px';
 
-  relatedMovies.setHTML('');
+  relatedMovies.innerHTML = '';
   const carouselContainer = carousel();
   relatedMovies.append(carouselContainer);
 
   let page = 1;
   let movies = [];
 
-  const io = infiniteScroll(async () => {
+  const io = createIntersectionObserver(async () => {
     const moviesData = await getRelatedMovies({ movieId: id, page: page++ });
 
     if (moviesData.length > 0) {
@@ -85,23 +85,9 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
     if (moviesData.length === 0) target.remove();
   });
   io.observe(target);
-
-  // carouselContainer.onscroll = async (e) => {
-  //   if ((e.target.scrollLeft) >= (e.target.scrollWidth - e.target.clientWidth)) {
-  //     const newRelatedMovies = await getRelatedMovies({ movieId: id, page: page + 1 });
-  //     newRelatedMovies?.forEach((movie, index) => {
-  //       if (index < newRelatedMovies.length - 1) {
-  //         carouselContainer.appendChild(
-  //           Poster({ movie: newRelatedMovies[index + 1] })
-  //         );
-  //       }
-  //     });
-  //     page++;
-  //   }
-  // };
 }
 
-export function infiniteScroll (callback) {
+export function createIntersectionObserver (callback) {
   const io = new window.IntersectionObserver(() => callback());
 
   return io;

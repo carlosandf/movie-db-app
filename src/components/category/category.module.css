@@ -10,6 +10,9 @@
   text-align: center;
   cursor: pointer;
 }
+.category:hover {
+  opacity: .8;
+}
 .category > a {
   color: #fff;
   text-decoration: none;

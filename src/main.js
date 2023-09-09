@@ -4,6 +4,7 @@ import { movieDetails, homeContent, genericListView } from './components/views/v
 import { carousel } from './components/carousel/carousel.js';
 import { getFromLocalStorage } from './utils/local_storage.js';
 import { searchMovies } from './services/search_form/search_form.js';
+import { PosterSkeleton } from './components/poster_skeleton/poster_skeleton.js';
 
 import {
   findById,
@@ -31,8 +32,17 @@ const trend = $.querySelector('#trend');
 const trendCarousel = carousel();
 trend.appendChild(trendCarousel);
 
+const arraySkeletons = new Array(7);
+
+for (let i = 0; i < arraySkeletons.length; i++) {
+  trendCarousel.appendChild(
+    PosterSkeleton()
+  );
+}
+
 getTrendingMoviesPreview({})
   .then(movies => {
+    trendCarousel.innerText = '';
     movies?.forEach(movie => {
       trendCarousel?.appendChild(
         Poster({ movie })

@@ -22,6 +22,7 @@ export const Poster = ({ movie, generic }) => {
   const img = $.createElement('img');
   img.src = movie?.poster_path ? getImage({ size: 300, path: movie.poster_path }) : imageNotFound;
   img.alt = movie?.title;
+  img.loading = 'lazy';
 
   figure.appendChild(img);
 

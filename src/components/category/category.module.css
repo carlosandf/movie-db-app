@@ -17,4 +17,5 @@
   color: #fff;
   text-decoration: none;
   width: max-content;
+  text-wrap: nowrap;
 }

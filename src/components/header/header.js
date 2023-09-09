@@ -1,4 +1,4 @@
-import imageNotFound from '../../../public/image_not_found.jpg';
+import imageNotFound from '/image_not_found.jpg';
 import { getImage } from '../../utils/constants.js';
 import { removeFromLocalStorage } from '../../utils/local_storage.js';
 

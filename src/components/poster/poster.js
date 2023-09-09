@@ -1,5 +1,5 @@
 import { getImage } from '../../utils/constants.js';
-import imageNotFound from '../../../public/image_not_found.jpg';
+import imageNotFound from '/image_not_found.jpg';
 import { setLocationHash } from '../../utils/set_location_hash.js';
 import styles from './poster.module.css';
 /*

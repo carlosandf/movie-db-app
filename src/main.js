@@ -36,7 +36,7 @@ const arraySkeletons = new Array(7);
 
 for (let i = 0; i < arraySkeletons.length; i++) {
   trendCarousel.appendChild(
-    PosterSkeleton()
+    PosterSkeleton('16rem')
   );
 }
 
@@ -50,18 +50,6 @@ getTrendingMoviesPreview({})
     });
   })
   .catch(console.error);
-// let page = 1;
-// trendCarousel.onscroll = async (e) => {
-//   if ((e.target.scrollLeft) >= (e.target.scrollWidth - e.target.clientWidth)) {
-//     const newRelatedMovies = await getTrendingMoviesPreview({ page: page + 1 });
-//     newRelatedMovies?.forEach(movie => {
-//       trendCarousel.appendChild(
-//         Poster({ movie })
-//       );
-//     });
-//     page++;
-//   }
-// };
 
 // Genres
 const categories = $.querySelector('#categories');
@@ -87,7 +75,7 @@ function navigation () {
   } else if (hash.includes('category')) {
     const [, , categoryId] = hash.split('/');
     const name = getFromLocalStorage('category');
-
+    genericListView({ name });
     findAllByCategory({ id: categoryId })
       .then(movies => {
         genericListView({ movies, name });
@@ -95,6 +83,7 @@ function navigation () {
   } else if (hash.includes('search')) {
     const query = hash.split('=').at(1);
     const name = query.split('%20').join(' ');
+    genericListView({ name, searchActive: true });
     searchByMovieName({ query })
       .then(movies => {
         genericListView({ movies, name, searchActive: true });

@@ -2,6 +2,7 @@ import { saveOnLocalStorage } from '../../utils/local_storage.js';
 import { headerGenericList, headerHome, headerMovieDetail } from '../header/header.js';
 import { movieInfo } from '../movie_details/movie_detail.js';
 import { Poster } from '../poster/poster.js';
+import { PosterSkeleton } from '../poster_skeleton/poster_skeleton.js';
 
 const $ = document;
 const select = (query) => $.querySelector(query);
@@ -40,6 +41,17 @@ export const genericListView = ({ movies, name, searchActive }) => {
   genericList.innerHTML = '';
   headerGenericList({ searchActive });
 
+  if (!movies) {
+    const { length } = new Array(30);
+    for (let i = 0; i < length; i++) {
+      genericList.appendChild(
+        PosterSkeleton()
+      );
+    }
+    return;
+  }
+
+  genericList.innerHTML = '';
   movies?.forEach(movie => {
     genericList.appendChild(
       Poster({ movie, generic: true })

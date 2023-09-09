@@ -1,6 +1,7 @@
 .movie-item {
   aspect-ratio: 9/14;
-  min-width: 16rem;
+  /* min-width: 16rem;
+  width: 100%; */
   background-color: #67676769;
   border-radius: 5px;
   animation: skeleton infinite 1.5s;

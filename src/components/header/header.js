@@ -10,6 +10,7 @@ const mainTitle = select('.main-title');
 const backIcon = select('.back-icon');
 const search = select('.search');
 const headerImg = select('.header-movie-image');
+const nav = select('#nav');
 
 export function headerMovieDetail ({ poster_path }) {
   header?.classList.add('header-movie-details');
@@ -18,6 +19,7 @@ export function headerMovieDetail ({ poster_path }) {
   backIcon?.classList.remove('inactive');
   search?.classList.add('inactive');
   headerImg.src = `${poster_path ? getImage({ path: poster_path }) : imageNotFound}`;
+  nav.style.position = 'absolute';
 
   backIcon.onclick = () => window.history.back();
 }
@@ -35,6 +37,7 @@ export function headerGenericList ({ searchActive = false }) {
   header?.classList.remove('header-movie-details');
   mainTitle?.classList.add('inactive');
   backIcon?.classList.remove('inactive');
+  nav.style.position = 'static';
 
   if (!searchActive) search?.classList.add('inactive');
 

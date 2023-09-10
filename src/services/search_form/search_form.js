@@ -5,7 +5,7 @@ export function searchMovies (form) {
 
   const data = Object.fromEntries(formData);
 
-  if (!data || !Object.keys(data).length > 0) return;
+  if (!data || data.search_input.length === 0) return;
   setLocationHash(`search=${data.search_input}`);
   form.children[0].value = '';
 }

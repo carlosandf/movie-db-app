@@ -10,6 +10,15 @@ import styles from './poster.module.css';
 </article>
 */
 const $ = document;
+const observer = new window.IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log('aparece');
+      entry.target.src = entry.target.dataset.src;
+      observer.unobserve(entry.target);
+    }
+  });
+});
 
 export const Poster = ({ movie, generic }) => {
   const article = $.createElement('article');
@@ -20,21 +29,20 @@ export const Poster = ({ movie, generic }) => {
   if (generic) figure.classList.add(styles['figure-generic-list']);
 
   const img = $.createElement('img');
-  img.src = movie?.poster_path ? getImage({ size: 300, path: movie.poster_path }) : imageNotFound;
+  const url = movie?.poster_path ? getImage({ size: 300, path: movie.poster_path }) : imageNotFound;
+  img.setAttribute(
+    'data-src',
+    url
+  );
+  observer.observe(img);
   img.alt = movie?.title;
+  // img.src = url;
   img.loading = 'lazy';
-
-  figure.appendChild(img);
-
-  // const footer = $.createElement('footer');
-  // footer.className = styles.posterFooter;
-  // const span = $.createElement('span');
-  // span.textContent = movie?.title;
-  // footer.appendChild(span);
 
   article.onclick = () => {
     setLocationHash(`movie/${movie?.id}`);
   };
+  figure.appendChild(img);
 
   article.append(figure);
   return article;

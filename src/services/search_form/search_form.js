@@ -6,6 +6,6 @@ export function searchMovies (form) {
   const data = Object.fromEntries(formData);
 
   if (!data || data.search_input.length === 0) return;
-  setLocationHash(`search=${data.search_input}`);
+  setLocationHash(`search=${data.search_input.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`);
   form.children[0].value = '';
 }

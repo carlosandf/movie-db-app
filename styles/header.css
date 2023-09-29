@@ -35,6 +35,7 @@
 
 .header-movie-details > .header-movie-image {
   width: 100%;
+  aspect-ratio: 16/9;
   display: block;
 }
 
@@ -117,6 +118,20 @@
   }
 }
 
+#header_img_skeleton {
+  aspect-ratio: 16/9;
+  width: 100%;
+  background-color: #67676769;
+  animation: skeleton infinite 1.5s;
+}
+@keyframes skeleton {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
 
 .section-movie-detail {
   color: var(--brandColor);

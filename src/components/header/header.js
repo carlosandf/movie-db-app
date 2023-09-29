@@ -10,18 +10,37 @@ const mainTitle = select('.main-title');
 const backIcon = select('.back-icon');
 const search = select('.search');
 const headerImg = select('.header-movie-image');
+const imgSkeleton = select('#header_img_skeleton');
 const nav = select('#nav');
 
 export function headerMovieDetail ({ poster_path }) {
+  headerImg.classList.add('inactive');
   header?.classList.add('header-movie-details');
   gradientHeader?.classList.remove('inactive');
   mainTitle?.classList.add('inactive');
   backIcon?.classList.remove('inactive');
   search?.classList.add('inactive');
-  headerImg.src = `${poster_path ? getImage({ path: poster_path }) : imageNotFound}`;
+  imgSkeleton?.classList.remove('inactive');
+  // headerImg.src = `${poster_path ? getImage({ path: poster_path }) : imageNotFound}`;
+
+  if (poster_path) {
+    getImage({ path: poster_path })
+      .then(url => { headerImg.src = url; });
+  } else headerImg.src = imageNotFound;
+  headerImg.onload = () => {
+    headerImg.classList.remove('inactive');
+    imgSkeleton.classList.add('inactive');
+  };
+
   nav.style.position = 'absolute';
 
-  backIcon.onclick = () => window.history.back();
+  backIcon.onclick = () => {
+    window.history.back();
+    headerImg.src = null;
+  };
+  window.addEventListener('hashchange', () => {
+    headerImg.src = null;
+  });
 }
 
 export function headerHome () {
@@ -30,6 +49,8 @@ export function headerHome () {
   mainTitle?.classList.remove('inactive');
   backIcon?.classList.add('inactive');
   search?.classList.remove('inactive');
+  imgSkeleton?.classList.add('inactive');
+  headerImg.classList.add('inactive');
   header.style.backgroundImage = 'none';
 }
 
@@ -37,6 +58,8 @@ export function headerGenericList ({ searchActive = false }) {
   header?.classList.remove('header-movie-details');
   mainTitle?.classList.add('inactive');
   backIcon?.classList.remove('inactive');
+  imgSkeleton?.classList.add('inactive');
+  headerImg.classList.add('inactive');
   nav.style.position = 'static';
 
   if (!searchActive) search?.classList.add('inactive');

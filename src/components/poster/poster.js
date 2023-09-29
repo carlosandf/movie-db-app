@@ -10,15 +10,19 @@ import styles from './poster.module.css';
 </article>
 */
 const $ = document;
-const observer = new window.IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      console.log('aparece');
-      entry.target.src = entry.target.dataset.src;
-      observer.unobserve(entry.target);
-    }
+
+const createImageLazyLoad = (container, img) => {
+  const observer = new window.IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        img.src = img.dataset.src;
+        entry.target.appendChild(img);
+        observer.unobserve(entry.target);
+      }
+    });
   });
-});
+  observer.observe(container);
+};
 
 export const Poster = ({ movie, generic }) => {
   const article = $.createElement('article');
@@ -30,19 +34,18 @@ export const Poster = ({ movie, generic }) => {
 
   const img = $.createElement('img');
   const url = movie?.poster_path ? getImage({ size: 300, path: movie.poster_path }) : imageNotFound;
+
   img.setAttribute(
     'data-src',
     url
   );
-  observer.observe(img);
-  img.alt = movie?.title;
-  // img.src = url;
   img.loading = 'lazy';
+  createImageLazyLoad(figure, img);
+  img.alt = movie?.title;
 
   article.onclick = () => {
     setLocationHash(`movie/${movie?.id}`);
   };
-  figure.appendChild(img);
 
   article.append(figure);
   return article;

@@ -10,7 +10,7 @@ export const getImage = ({ size, path }) => {
 
   return new Promise((resolve, reject) => {
     if (window.outerWidth <= 550) {
-      return resolve(`${IMAGE_URL}/w400${path}`);
+      return resolve(`${IMAGE_URL}/w500${path}`);
     } else {
       compressImage(`${IMAGE_URL}/original${path}`, 20)
         .then(({ urlCompres }) => resolve(urlCompres));

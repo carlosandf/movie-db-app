@@ -28,10 +28,18 @@
   padding-right: 4px;
 }
 
+.overview-and-categories-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 35px;
+  flex-wrap: wrap;
+}
 .overview-text {
   font-size: 1.6rem;
   color: var(--text);
   font-style: italic;
+  max-width: 700px;
 }
 
 .categories-container {

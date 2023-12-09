@@ -30,10 +30,17 @@ relatedMoviesContainer.className = styles['related-movies-container'];
 const relatedMovies = $.querySelector('#related-movies');
 relatedMovies.className = styles['related-movies'];
 
-info.append(
-  voteAverage,
+const overviewAndCategoriesContainer = $.createElement('div');
+overviewAndCategoriesContainer.className = styles['overview-and-categories-container'];
+
+overviewAndCategoriesContainer.append(
   overviewText,
   categoriesContainer
+);
+
+info.append(
+  voteAverage,
+  overviewAndCategoriesContainer
 );
 
 infoContainer.append(

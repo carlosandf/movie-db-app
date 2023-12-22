@@ -13,7 +13,7 @@ export const getImage = ({ size, path }) => {
     if (window.outerWidth <= 550) {
       return resolve(`${IMAGE_URL}/w500${path}`);
     } else {
-      compressImage(`${IMAGE_URL}/original${path}`, 30)
+      compressImage(`${IMAGE_URL}/original${path}`, 15)
         .then(({ urlCompres }) => resolve(urlCompres));
     }
   });

@@ -33,7 +33,6 @@
   display: flex;
   align-items: flex-start;
   gap: 35px;
-  flex-wrap: wrap;
 }
 .overview-text {
   font-size: 1.6rem;

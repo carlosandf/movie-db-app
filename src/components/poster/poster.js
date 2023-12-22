@@ -1,4 +1,4 @@
-import { getImage } from '../../utils/constants.js';
+import { getImage, defaultLoadImage } from '../../utils/constants.js';
 import imageNotFound from '/image_not_found.jpg';
 import { setLocationHash } from '../../utils/set_location_hash.js';
 import styles from './poster.module.css';
@@ -11,17 +11,16 @@ import styles from './poster.module.css';
 */
 const $ = document;
 
-const createImageLazyLoad = (container, img) => {
+const createImageLazyLoad = (img) => {
   const observer = new window.IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         img.src = img.dataset.src;
-        entry.target.appendChild(img);
         observer.unobserve(entry.target);
       }
     });
   });
-  observer.observe(container);
+  observer.observe(img);
 };
 
 export const Poster = ({ movie, generic }) => {
@@ -39,9 +38,11 @@ export const Poster = ({ movie, generic }) => {
     'data-src',
     url
   );
+  img.src = defaultLoadImage;
   img.loading = 'lazy';
-  createImageLazyLoad(figure, img);
+  figure.appendChild(img);
   img.alt = movie?.title;
+  createImageLazyLoad(img);
 
   article.onclick = () => {
     setLocationHash(`movie/${movie?.id}`);

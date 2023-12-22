@@ -75,19 +75,20 @@ function navigation () {
   } else if (hash.includes('category')) {
     const [, , categoryId] = hash.split('/');
     const name = getFromLocalStorage('category');
-    genericListView({ name });
-    findAllByCategory({ id: categoryId })
-      .then(movies => {
-        genericListView({ movies, name });
-      });
+
+    genericListView({
+      getMovies: (page) => findAllByCategory({ id: categoryId, page }),
+      name
+    });
   } else if (hash.includes('search')) {
     const query = hash.split('=').at(1);
     const name = query.split('%20').join(' ');
-    genericListView({ name, searchActive: true });
-    searchByMovieName({ query })
-      .then(movies => {
-        genericListView({ movies, name, searchActive: true });
-      });
+
+    genericListView({
+      getMovies: (page) => searchByMovieName({ query, page }),
+      name,
+      searchActive: true
+    });
   } else if (hash === '') {
     homeContent();
   }

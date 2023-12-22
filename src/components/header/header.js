@@ -13,7 +13,7 @@ const headerImg = select('.header-movie-image');
 const imgSkeleton = select('#header_img_skeleton');
 const nav = select('#nav');
 
-export function headerMovieDetail ({ poster_path }) {
+export function headerMovieDetail ({ poster_path, title }) {
   headerImg.classList.add('inactive');
   header?.classList.add('header-movie-details');
   gradientHeader?.classList.remove('inactive');
@@ -23,10 +23,12 @@ export function headerMovieDetail ({ poster_path }) {
   imgSkeleton?.classList.remove('inactive');
   // headerImg.src = `${poster_path ? getImage({ path: poster_path }) : imageNotFound}`;
 
+  headerImg.alt = title;
   if (poster_path) {
     getImage({ path: poster_path })
       .then(url => { headerImg.src = url; });
-  } else headerImg.src = imageNotFound;
+  } else { headerImg.src = imageNotFound; }
+
   headerImg.onload = () => {
     headerImg.classList.remove('inactive');
     imgSkeleton.classList.add('inactive');

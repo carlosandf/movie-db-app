@@ -11,7 +11,9 @@ const home = select('#home');
 const detailsContainer = select('#movie-details');
 const genericListConteiner = select('#generic-list-container');
 const genericList = select('#generic-list');
+const $target = select('#generi-list-target');
 
+// HOME
 export const homeContent = () => {
   home.classList.remove('inactive');
   detailsContainer.classList.add('inactive');
@@ -19,16 +21,18 @@ export const homeContent = () => {
   headerHome();
 };
 
+// MOVIE DETAILS
 export const movieDetails = (movie) => {
   home.classList.add('inactive');
   detailsContainer.classList.remove('inactive');
   genericListConteiner.classList.add('inactive');
 
-  headerMovieDetail({ poster_path: movie.backdrop_path });
+  headerMovieDetail({ poster_path: movie.backdrop_path, title: movie.title });
   movieInfo(movie);
 };
 
-export const genericListView = ({ movies, name, searchActive }) => {
+// GENERIC LIST
+export const genericListView = async ({ name, searchActive, getMovies = async () => {} }) => {
   home.classList.add('inactive');
   genericListConteiner.classList.remove('inactive');
   detailsContainer.classList.add('inactive');
@@ -41,20 +45,40 @@ export const genericListView = ({ movies, name, searchActive }) => {
   genericList.innerHTML = '';
   headerGenericList({ searchActive });
 
-  if (!movies) {
+  if (typeof getMovies === 'function') {
     const { length } = new Array(30);
     for (let i = 0; i < length; i++) {
       genericList.appendChild(
         PosterSkeleton()
       );
     }
-    return;
-  }
 
-  genericList.innerHTML = '';
-  movies?.forEach(movie => {
-    genericList.appendChild(
-      Poster({ movie, generic: true })
-    );
-  });
+    const movies = await getMovies();
+    genericList.innerHTML = '';
+    movies?.forEach(movie => {
+      genericList.appendChild(
+        Poster({ movie, generic: true })
+      );
+    });
+
+    let page = 2;
+    const observer = new window.IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          getMovies(page)
+            .then(movies => {
+              movies?.forEach(movie => {
+                genericList.appendChild(
+                  Poster({ movie, generic: true })
+                );
+              });
+              page++;
+              if (movies.length === 0) observer.disconnect();
+            });
+        }
+      });
+    });
+
+    observer.observe($target);
+  }
 };

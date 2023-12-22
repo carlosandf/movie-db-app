@@ -73,7 +73,7 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
 
   const io = createIntersectionObserver(async () => {
     const moviesData = await getRelatedMovies({ movieId: id, page: page++ });
-
+    console.log({ moviesData });
     if (moviesData.length > 0) {
       movies = [...movies, ...moviesData];
       relatedMoviesContainer.classList.remove('inactive');
@@ -87,13 +87,15 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
       });
       carouselContainer.appendChild(target);
     }
-    if (moviesData.length === 0) target.remove();
+    if (moviesData.length === 0) io.disconnect();
   });
   io.observe(target);
 }
 
 export function createIntersectionObserver (callback) {
-  const io = new window.IntersectionObserver(() => callback());
+  const io = new window.IntersectionObserver(
+    () => callback()
+  );
 
   return io;
 }

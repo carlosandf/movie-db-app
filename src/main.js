@@ -19,6 +19,8 @@ import '../style.css';
 const $ = document;
 // $.querySelector('#header').append(headerContent);
 
+const $title = 'MovieFlix';
+
 // search input
 const searchForm = $.querySelector('#search_form');
 searchForm.onsubmit = (e) => {
@@ -71,11 +73,15 @@ function navigation () {
   if (hash.includes('movie')) {
     const id = hash.split('/').at(1);
 
-    findById({ id }).then(movie => movieDetails(movie));
+    findById({ id }).then(movie => {
+      $.title = `${$title} | ${movie.title}`;
+      movieDetails(movie);
+    });
   } else if (hash.includes('category')) {
     const [, , categoryId] = hash.split('/');
     const name = getFromLocalStorage('category');
 
+    $.title = `${$title} | ${name}`;
     genericListView({
       getMovies: (page) => findAllByCategory({ id: categoryId, page }),
       name
@@ -84,12 +90,14 @@ function navigation () {
     const query = hash.split('=').at(1);
     const name = query.split('%20').join(' ');
 
+    $.title = `${$title} | ${name}`;
     genericListView({
       getMovies: (page) => searchByMovieName({ query, page }),
       name,
       searchActive: true
     });
   } else if (hash === '') {
+    $.title = $title;
     homeContent();
   }
   window.scroll({ top: 0 });

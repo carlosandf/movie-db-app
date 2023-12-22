@@ -58,3 +58,9 @@
 .related-movies {
   display: flex;
 }
+
+@media (max-width: 900px) {
+  .overview-and-categories-container {
+    flex-wrap: wrap;
+  }
+}

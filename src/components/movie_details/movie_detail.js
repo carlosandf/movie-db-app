@@ -92,7 +92,7 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
     }
     if (moviesData.length === 0) {
       io.disconnect();
-      // target.removeChild(spinner);
+      target.removeChild(spinner);
     }
   });
   target.appendChild(spinner);

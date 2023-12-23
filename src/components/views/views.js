@@ -1,5 +1,6 @@
 import { saveOnLocalStorage } from '../../utils/local_storage.js';
 import { headerGenericList, headerHome, headerMovieDetail } from '../header/header.js';
+import { LoadingSpinner } from '../loading_spinner/loading_spinner.js';
 import { movieInfo } from '../movie_details/movie_detail.js';
 import { Poster } from '../poster/poster.js';
 import { PosterSkeleton } from '../poster_skeleton/poster_skeleton.js';
@@ -40,6 +41,8 @@ export const genericListView = async ({ name, searchActive, getMovies = async ()
   const title = genericListConteiner.children[0];
   title.textContent = name;
 
+  const spinner = LoadingSpinner();
+
   saveOnLocalStorage('category', name);
 
   genericList.innerHTML = '';
@@ -73,12 +76,16 @@ export const genericListView = async ({ name, searchActive, getMovies = async ()
                 );
               });
               page++;
-              if (movies.length === 0) observer.disconnect();
+              if (movies.length === 0) {
+                observer.disconnect();
+                $target.removeChild(spinner);
+              }
             });
         }
       });
     });
 
+    $target.appendChild(spinner);
     observer.observe($target);
   }
 };

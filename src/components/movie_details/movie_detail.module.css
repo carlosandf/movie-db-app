@@ -59,6 +59,12 @@
   display: flex;
 }
 
+.target {
+  display: grid;
+  place-content: center;
+  padding: 10px;
+}
+
 @media (max-width: 900px) {
   .overview-and-categories-container {
     flex-wrap: wrap;

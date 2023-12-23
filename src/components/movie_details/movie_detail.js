@@ -1,6 +1,7 @@
 import { getRelatedMovies } from '../../services/movies-axios.js';
 import { carousel } from '../carousel/carousel.js';
 import { Category } from '../category/category.js';
+import { LoadingSpinner } from '../loading_spinner/loading_spinner.js';
 import { Poster } from '../poster/poster.js';
 import styles from './movie_detail.module.css';
 
@@ -62,7 +63,7 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
 
   // const page = 1;
   const target = document.createElement('div');
-  target.style.width = '10px';
+  target.className = styles.target;
 
   relatedMovies.innerHTML = '';
   const carouselContainer = carousel();
@@ -70,6 +71,8 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
 
   let page = 1;
   let movies = [];
+
+  const spinner = LoadingSpinner();
 
   const io = createIntersectionObserver(async () => {
     const moviesData = await getRelatedMovies({ movieId: id, page: page++ });
@@ -87,8 +90,12 @@ export function movieInfo ({ title, overview, vote_average, genres, id }) {
       });
       carouselContainer.appendChild(target);
     }
-    if (moviesData.length === 0) io.disconnect();
+    if (moviesData.length === 0) {
+      io.disconnect();
+      // target.removeChild(spinner);
+    }
   });
+  target.appendChild(spinner);
   io.observe(target);
 }
 

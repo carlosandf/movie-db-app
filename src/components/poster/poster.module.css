@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.loading {
+  animation: loading infinite 1.5s;
+}
+
 .figure > img {
   width: 100%;
   object-fit: cover;
@@ -23,6 +27,15 @@
 
 .figure-generic-list {
   width: 100%;
+}
+
+@keyframes loading {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 /* .posterFooter {

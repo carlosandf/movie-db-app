@@ -1,4 +1,4 @@
-import { getImage, defaultLoadImage } from '../../utils/constants.js';
+import { getImage } from '../../utils/constants.js';
 import imageNotFound from '/image_not_found.jpg';
 import { setLocationHash } from '../../utils/set_location_hash.js';
 import styles from './poster.module.css';
@@ -9,25 +9,26 @@ import styles from './poster.module.css';
   </figure>
 </article>
 */
+const defaultLoadImage = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4=';
 const $ = document;
 
-const createImageLazyLoad = (img) => {
-  const observer = new window.IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        img.src = img.dataset.src;
-        observer.unobserve(entry.target);
-      }
-    });
+const observer = new window.IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.src = entry.target.dataset.src;
+      observer.unobserve(entry.target);
+      entry.target.onload = () => {
+        entry.target.parentNode.classList.remove(styles.loading);
+      };
+    }
   });
-  observer.observe(img);
-};
+});
 
 export const Poster = ({ movie, generic }) => {
   const article = $.createElement('article');
   article.className = styles['movie-item'];
   const figure = $.createElement('figure');
-  figure.className = styles.figure;
+  figure.classList.add(styles.figure, styles.loading);
 
   if (generic) figure.classList.add(styles['figure-generic-list']);
 
@@ -42,7 +43,7 @@ export const Poster = ({ movie, generic }) => {
   img.loading = 'lazy';
   figure.appendChild(img);
   img.alt = movie?.title;
-  createImageLazyLoad(img);
+  observer.observe(img);
 
   article.onclick = () => {
     setLocationHash(`movie/${movie?.id}`);

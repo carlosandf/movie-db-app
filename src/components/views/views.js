@@ -86,7 +86,9 @@ export const genericListView = async ({ name, searchActive, getMovies = async ()
     });
 
     const hasChildElement = $.hasChildNodes();
-    $target.removeChild(spinner);
+    if (hasChildElement) {
+      $target.removeChild(spinner);
+    }
     $target.appendChild(spinner);
     observer.observe($target);
   }

@@ -85,11 +85,10 @@ export const genericListView = async ({ name, searchActive, getMovies = async ()
       });
     });
 
-    const hasChildElement = $.hasChildNodes();
-    if (hasChildElement) {
-      $target.removeChild(spinner);
+    const hasChildElement = $target.hasChildNodes();
+    if (!hasChildElement) {
+      $target.appendChild(spinner);
     }
-    $target.appendChild(spinner);
     observer.observe($target);
   }
 };

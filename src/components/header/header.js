@@ -38,10 +38,10 @@ export function headerMovieDetail ({ poster_path, title }) {
 
   backIcon.onclick = () => {
     window.history.back();
-    headerImg.src = null;
+    headerImg.src = '';
   };
   window.addEventListener('hashchange', () => {
-    headerImg.src = null;
+    headerImg.src = '';
   });
 }
 

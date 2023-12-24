@@ -89,15 +89,16 @@ footer {
   justify-content: center;
   gap: 1rem;
   font-size: medium;
+  color: var(--text)
 }
 
 footer a {
   color: var(--brandColor)
 }
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     background-color: var(--bg-light);
     --text: var(--black);
     --bg: var(--bg-light)
   }
-}
+} */

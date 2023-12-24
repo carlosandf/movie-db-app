@@ -153,14 +153,11 @@
   color: var(--brandColor);
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   .section-movie-detail {
     background-color: var(--bg-light);
   }
   a:hover {
     color: #e5e5e5;
   }
-  /* button {
-    background-color: #f9f9f9;
-  } */
-}
+} */

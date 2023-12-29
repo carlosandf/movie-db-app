@@ -16,10 +16,19 @@ const observer = new window.IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.src = entry.target.dataset.src;
-      observer.unobserve(entry.target);
       entry.target.onload = () => {
+        observer.unobserve(entry.target);
         entry.target.parentNode.classList.remove(styles.loading);
       };
+      if (!navigator.onLine) {
+        const interval = setInterval(() => {
+          entry.target.src = entry.target.dataset.src;
+          if (navigator.onLine) {
+            entry.target.src = entry.target.dataset.src;
+            clearInterval(interval);
+          }
+        }, 5000);
+      }
     }
   });
 });
@@ -39,6 +48,7 @@ export const Poster = ({ movie, generic }) => {
     'data-src',
     url
   );
+
   img.src = defaultLoadImage;
   img.loading = 'lazy';
   figure.appendChild(img);
